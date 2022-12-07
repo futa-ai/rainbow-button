@@ -1,27 +1,34 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta http-equiv="content-type" content="text/html;charset=utf-8">
-        <link rel="stylesheet" href="popup.css">
-    </head>
+  <head>
+    <meta http-equiv="content-type" content="text/html;charset=utf-8">
+    <link rel="stylesheet" href="popup.css">
+  </head>
 
-    <body>
-
-    <p>光らせたいタグ<br>
+  <body>
+    
+    <div>
+      <p>光らせたいタグ</p>
+      <div class="choice">
         <label><input type="checkbox" name="tag" value="a">aタグ</label>
         <label><input type="checkbox" name="tag" value="p">pタグ</label>
         <label><input type="checkbox" name="tag" value="button">buttonタグ</label>
-    </p>
+      </div>
+    </div>
+    
 
-    <p>光らせたい色<br>
+    <div>
+      <p>光らせたい色</p>
+      <div class="choice">
         <label><input type="radio" name="color" value="rainbow">rainbow</label>
         <label><input type="radio" name="color" value="pink">pink</label>
         <label><input type="radio" name="color" value="blue">blue</label>
-    </p>
+      </div>
+    </div>
 
-    <p><input type="submit" value="決定"></p>
+    <input type="submit" value="決定">
 
     <script src="index.js"></script>
 
-    </body>
+  </body>
 </html>

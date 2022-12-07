@@ -11,5 +11,9 @@
     "content_scripts": [{
         "matches": [ "http://*/*", "https://*/*" ],
         "css": ["style.css"]
-    }]
+    }],
+    "action": {
+        "default_popup": "popup.html"
+    },
+    "permissions": ["storage"]
 }

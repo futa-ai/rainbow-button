@@ -1,0 +1,7 @@
+a {
+    background: linear-gradient(to right, Magenta, yellow, Cyan, Magenta) 0 / 200%;
+    animation: 5s example4 linear infinite;
+}
+@keyframes example4{
+    100% { background-position: 200%; }
+}

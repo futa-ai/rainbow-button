@@ -7,109 +7,271 @@ void main() {
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'rainbow button',
       theme: ThemeData(
-        // This is the theme of your application.
-        //
-        // Try running your application with "flutter run". You'll see the
-        // application has a blue toolbar. Then, without quitting the app, try
-        // changing the primarySwatch below to Colors.green and then invoke
-        // "hot reload" (press "r" in the console where you ran "flutter run",
-        // or simply save your changes to "hot reload" in a Flutter IDE).
-        // Notice that the counter didn't reset back to zero; the application
-        // is not restarted.
         primarySwatch: Colors.blue,
       ),
-      home: const MyHomePage(title: 'はろーわーるど'),
+      home: const MyHomePage(),
     );
   }
 }
 
+enum RadioValue { RAINBOW, BLACK, BROWN, ORANGE, YELLOW, GREEN, BLUE, PURPLE, PINK, RED }
+var _isChecked = List.filled(3, false);
+List<String> tagName = [];
+String colorName = "";
+
 class MyHomePage extends StatefulWidget {
-  const MyHomePage({Key? key, required this.title}) : super(key: key);
-
-  // This widget is the home page of your application. It is stateful, meaning
-  // that it has a State object (defined below) that contains fields that affect
-  // how it looks.
-
-  // This class is the configuration for the state. It holds the values (in this
-  // case the title) provided by the parent (in this case the App widget) and
-  // used by the build method of the State. Fields in a Widget subclass are
-  // always marked "final".
-
-  final String title;
+  const MyHomePage({Key? key}) : super(key: key);
 
   @override
   State<MyHomePage> createState() => _MyHomePageState();
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      // This call to setState tells the Flutter framework that something has
-      // changed in this State, which causes it to rerun the build method below
-      // so that the display can reflect the updated values. If we changed
-      // _counter without calling setState(), then the build method would not be
-      // called again, and so nothing would appear to happen.
-      _counter++;
-    });
-  }
-
+  bool _active = false;
+  void _changeSwitch(bool e) => setState(() => _active = e);
+  RadioValue _gValue = RadioValue.RAINBOW;
   @override
   Widget build(BuildContext context) {
-    // This method is rerun every time setState is called, for instance as done
-    // by the _incrementCounter method above.
-    //
-    // The Flutter framework has been optimized to make rerunning build methods
-    // fast, so that you can just rebuild anything that needs updating rather
-    // than having to individually change instances of widgets.
     return Scaffold(
-      appBar: AppBar(
-        // Here we take the value from the MyHomePage object that was created by
-        // the App.build method, and use it to set our appbar title.
-        title: Text(widget.title),
-      ),
-      body: Center(
-        // Center is a layout widget. It takes a single child and positions it
-        // in the middle of the parent.
+      appBar: null,
+      body: Container(
+        width: 350,
         child: Column(
-          // Column is also a layout widget. It takes a list of children and
-          // arranges them vertically. By default, it sizes itself to fit its
-          // children horizontally, and tries to be as tall as its parent.
-          //
-          // Invoke "debug painting" (press "p" in the console, choose the
-          // "Toggle Debug Paint" action from the Flutter Inspector in Android
-          // Studio, or the "Toggle Debug Paint" command in Visual Studio Code)
-          // to see the wireframe for each widget.
-          //
-          // Column has various properties to control how it sizes itself and
-          // how it positions its children. Here we use mainAxisAlignment to
-          // center the children vertically; the main axis here is the vertical
-          // axis because Columns are vertical (the cross axis would be
-          // horizontal).
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            const Text(
-              'You have pushed the button this many times:',
+          children: [
+            Column(
+              children: [
+                const Text('まずはここから'),
+                SwitchListTile(
+                  value: _active,
+                  activeColor: Colors.orange,
+                  activeTrackColor: Colors.red,
+                  inactiveThumbColor: Colors.blue,
+                  inactiveTrackColor: Colors.grey,
+                  /// アイコンを付けるならここ
+                  // secondary: new Icon(
+                  //   Icons.thumb_up,
+                  //   color: _active ? Colors.orange[700] : Colors.grey[500],
+                  //   size: 50.0,
+                  // ),
+                  title: const Text('ボタンを光らせる？'),
+                  subtitle: const Text('サブタイトル'),
+                  onChanged: _changeSwitch,
+                ),
+                Row(
+                  children: [
+                    SizedBox(
+                      width: 150,
+                      child: RadioListTile(
+                        title: const Text('Rainbow'),
+                        value: RadioValue.RAINBOW,
+                        groupValue: _gValue,
+                        onChanged: (value) => _onRadioSelected(value),
+                      ),
+                    ),
+                    SizedBox(
+                      width: 150,
+                      child: RadioListTile(
+                        title: const Text('Black'),
+                        value: RadioValue.BLACK,
+                        groupValue: _gValue,
+                        onChanged: (value) => _onRadioSelected(value),
+                      ),
+                    ),
+                  ],
+                ),
+                Row(
+                  children: [
+                    SizedBox(
+                      width: 150,
+                      child: RadioListTile(
+                        title: const Text('Brown'),
+                        value: RadioValue.BROWN,
+                        groupValue: _gValue,
+                        onChanged: (value) => _onRadioSelected(value),
+                      ),
+                    ),
+                    SizedBox(
+                      width: 150,
+                      child: RadioListTile(
+                        title: const Text('Orange'),
+                        value: RadioValue.ORANGE,
+                        groupValue: _gValue,
+                        onChanged: (value) => _onRadioSelected(value),
+                      ),
+                    ),
+                  ],
+                ),
+                Row(
+                  children: [
+                    SizedBox(
+                      width: 150,
+                      child: RadioListTile(
+                        title: const Text('Yellow'),
+                        value: RadioValue.YELLOW,
+                        groupValue: _gValue,
+                        onChanged: (value) => _onRadioSelected(value),
+                      ),
+                    ),
+                    SizedBox(
+                      width: 150,
+                      child: RadioListTile(
+                        title: const Text('Green'),
+                        value: RadioValue.GREEN,
+                        groupValue: _gValue,
+                        onChanged: (value) => _onRadioSelected(value),
+                      ),
+                    ),
+                  ],
+                ),
+                Row(
+                  children: [
+                    SizedBox(
+                      width: 150,
+                      child: RadioListTile(
+                        title: const Text('Blue'),
+                        value: RadioValue.BLUE,
+                        groupValue: _gValue,
+                        onChanged: (value) => _onRadioSelected(value),
+                      ),
+                    ),
+                    SizedBox(
+                      width: 150,
+                      child: RadioListTile(
+                        title: const Text('Purple'),
+                        value: RadioValue.PURPLE,
+                        groupValue: _gValue,
+                        onChanged: (value) => _onRadioSelected(value),
+                      ),
+                    ),
+                  ],
+                ),
+                Row(
+                  children: [
+                    SizedBox(
+                      width: 150,
+                      child: RadioListTile(
+                        title: const Text('Pink'),
+                        value: RadioValue.PINK,
+                        groupValue: _gValue,
+                        onChanged: (value) => _onRadioSelected(value),
+                      ),
+                    ),
+                    SizedBox(
+                      width: 150,
+                      child: RadioListTile(
+                        title: const Text('Red'),
+                        value: RadioValue.RED,
+                        groupValue: _gValue,
+                        onChanged: (value) => _onRadioSelected(value),
+                      ),
+                    ),
+                  ],
+                ),
+              ],
             ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headline4,
+            Column(
+              children: [
+                const Text('どのタグを光らせる？'),
+                Row(
+                  children: [
+                    Checkbox(
+                      checkColor: Colors.white,
+                      activeColor: Colors.blue,
+                      value: _isChecked[0],
+                      onChanged: (bool? value) {
+                        _handleCheckbox(0, !_isChecked[0]);
+                      },
+                    ),
+                    const Text('a'),
+                    Checkbox(
+                      checkColor: Colors.white,
+                      activeColor: Colors.blue,
+                      value: _isChecked[1],
+                      onChanged: (bool? value) {
+                        _handleCheckbox(1, !_isChecked[1]);
+                      },
+                    ),
+                    const Text('p'),
+                    Checkbox(
+                      checkColor: Colors.white,
+                      activeColor: Colors.blue,
+                      value: _isChecked[2],
+                      onChanged: (bool? value) {
+                        _handleCheckbox(2, !_isChecked[2]);
+                      },
+                    ),
+                    const Text('button'),
+                  ],
+                ),
+              ],
             ),
+            ElevatedButton(
+              onPressed: () async{
+                switch(_gValue){
+                  case RadioValue.RAINBOW:
+                    colorName = "rainbow";
+                    break;
+                  case RadioValue.BLACK:
+                    colorName = "black";
+                    break;
+                  case RadioValue.BROWN:
+                    colorName = "brown";
+                    break;
+                  case RadioValue.ORANGE:
+                    colorName = "orange";
+                    break;
+                  case RadioValue.YELLOW:
+                    colorName = "yellow";
+                    break;
+                  case RadioValue.GREEN:
+                    colorName = "green";
+                    break;
+                  case RadioValue.BLUE:
+                    colorName = "blue";
+                    break;
+                  case RadioValue.PURPLE:
+                    colorName = "purple";
+                    break;
+                  case RadioValue.PINK:
+                    colorName = "pink";
+                    break;
+                  case RadioValue.RED:
+                    colorName = "red";
+                    break;
+                  default:
+                    debugPrint('【異常】： switch文の引数になりえないデータです。');
+                    break;
+                }
+                debugPrint('色は$colorNameです');
+                if(_isChecked[0]) tagName.add('a');
+                if(_isChecked[1]) tagName.add('p');
+                if(_isChecked[2]) tagName.add('button');
+                debugPrint('タグは$tagNameです');
+              },
+              child: const Text('光らせる！'),
+            )
           ],
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
+
+  _onRadioSelected(value) {
+    setState(() {
+      _gValue = value;
+    });
+
+  }
+
+  void _handleCheckbox(int i, bool value) {
+    setState(() {
+      _isChecked[i] = value;
+    });
+  }
 }
+

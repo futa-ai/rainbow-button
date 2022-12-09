@@ -9,8 +9,12 @@
         "128": "icons/icon128.png"
     },
     "content_scripts": [{
-        "matches": [ "http://*/*", "https://*/*" ],
+        "matches": [ "<all_urls>" ],
         "css": ["style.css"],
         "js": ["index.js"]
-    }]
+    }],
+    "action": {
+        "default_popup": "popup.html"
+    },
+    "permissions": ["storage"]
 }

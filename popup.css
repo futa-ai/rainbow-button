@@ -1,0 +1,6 @@
+body {
+	min-width: 200px;
+}
+.choice {
+	display: flex;
+}

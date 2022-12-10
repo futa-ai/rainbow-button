@@ -35,8 +35,10 @@ enum RadioValue {
 }
 var _isChecked = List.filled(3, false);
 var _isOpened = [true, false, false];
+var _canTap = true;
 List<String> tagName = [];
 String colorName = "";
+Color _notSelectedColor = const Color(0xffE5E5E5);
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({Key? key}) : super(key: key);
@@ -47,9 +49,22 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   bool _active = false;
+  bool _activeAll = false;
   void _changeSwitch(bool e) {
     e ? _isChecked[0] = _isChecked[2] = true :  _isChecked[0] = _isChecked[2] = false;
     setState(() => _active = e);
+  }
+  void _allSwitch(bool e) {
+    e ? {
+      _isOpened = [true, false, false],
+      _canTap = true,
+    } :  {
+      _isOpened = [false, false, false],
+      _canTap = false,
+      setData([], 'rainbow'),
+      reloadPage(),
+    };
+    setState(() => _activeAll = !e);
   }
   RadioValue _gValue = RadioValue.RAINBOW;
   @override
@@ -60,31 +75,55 @@ class _MyHomePageState extends State<MyHomePage> {
         width: 350,
         child: Column(
           children: [
+            SizedBox(
+              width: 330,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.end,
+                children: [
+                  SizedBox(
+                    width: 165,
+                    child: SwitchListTile(
+                      value: !_activeAll,
+                      activeColor: Colors.orange,
+                      activeTrackColor: Colors.red,
+                      inactiveThumbColor: Colors.blue,
+                      inactiveTrackColor: Colors.grey,
+
+                      title: const Text('OFF/ON'),
+                      onChanged: _allSwitch,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+
             const SizedBox(height: 10),
 
             Container(
               width: 330,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(10),
-                color: const Color(0xffFFF5DB),
-                boxShadow: const [
+                color: (_canTap) ? const Color(0xffFFF5DB) : _notSelectedColor,
+                boxShadow: (_canTap) ? const [
                   BoxShadow(
                     color: Color(0xffE5E5E5),
                     spreadRadius: 5,
                     blurRadius: 5,
                     offset: Offset(1, 1),
                   ),
-                ],
+                ] : null,
               ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   InkWell(
                     onTap: () {
-                      setState(() {
-                        _isOpened[0] = !_isOpened[0];
-                        _isOpened[1] = !_isOpened[1];
-                      });
+                      (_canTap) ?
+                        setState(() {
+                          _isOpened[0] = !_isOpened[0];
+                          _isOpened[1] = !_isOpened[1];
+                        })
+                      : null;
                     },
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.center,
@@ -133,10 +172,12 @@ class _MyHomePageState extends State<MyHomePage> {
                   }(),
                   InkWell(
                     onTap: () {
+                      (_canTap) ?
                       setState(() {
                         _isOpened[0] = !_isOpened[0];
                         _isOpened[1] = !_isOpened[1];
-                      });
+                      })
+                          : null;
                     },
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.center,
@@ -162,25 +203,27 @@ class _MyHomePageState extends State<MyHomePage> {
               width: 330,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(10),
-                color: const Color(0xffFFF5DB),
-                boxShadow: const [
+                color: (_canTap) ? const Color(0xffFFF5DB) : _notSelectedColor,
+                boxShadow: (_canTap) ? const [
                   BoxShadow(
                     color: Color(0xffE5E5E5),
                     spreadRadius: 5,
                     blurRadius: 5,
                     offset: Offset(1, 1),
                   ),
-                ],
+                ] : null,
               ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   InkWell(
                     onTap: () {
+                      (_canTap) ?
                       setState(() {
                         _isOpened[0] = !_isOpened[0];
                         _isOpened[1] = !_isOpened[1];
-                      });
+                      })
+                          : null;
                     },
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.center,
@@ -249,10 +292,12 @@ class _MyHomePageState extends State<MyHomePage> {
                   }(),
                   InkWell(
                     onTap: () {
+                      (_canTap) ?
                       setState(() {
                         _isOpened[0] = !_isOpened[0];
                         _isOpened[1] = !_isOpened[1];
-                      });
+                      })
+                          : null;
                     },
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.center,
@@ -275,7 +320,7 @@ class _MyHomePageState extends State<MyHomePage> {
             const SizedBox(height: 10),
 
             ElevatedButton(
-              onPressed: () async {
+              onPressed: (!_canTap) ? null : () async {
                 switch (_gValue) {
                   case RadioValue.RAINBOW:
                     colorName = "rainbow";

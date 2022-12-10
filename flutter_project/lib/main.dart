@@ -250,12 +250,15 @@ class _MyHomePageState extends State<MyHomePage> {
                     break;
                 }
                 debugPrint('色は$colorNameです');
+                tagName = [];
                 if(_isChecked[0]) tagName.add('a');
                 if(_isChecked[1]) tagName.add('p');
                 if(_isChecked[2]) tagName.add('button');
                 debugPrint('タグは$tagNameです');
-                await new Future.delayed(new Duration(seconds: 1));
-                changeColor(tagName, colorName);
+                setData(tagName, colorName);
+                reloadPage();
+                // changeColor();
+                // await Future.delayed(const Duration(seconds: 2));
               },
               child: const Text('光らせる！'),
             )

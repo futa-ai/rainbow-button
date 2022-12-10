@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_project/javascript.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 void main() {
   runApp(const MyApp());
@@ -84,10 +85,10 @@ class _MyHomePageState extends State<MyHomePage> {
                     width: 165,
                     child: SwitchListTile(
                       value: !_activeAll,
-                      activeColor: Colors.orange,
-                      activeTrackColor: Colors.red,
-                      inactiveThumbColor: Colors.blue,
-                      inactiveTrackColor: Colors.grey,
+                      activeColor: Colors.lightBlueAccent,
+                      activeTrackColor: const Color(0xffC1EFFF),
+                      inactiveThumbColor: Colors.black38,
+                      inactiveTrackColor: _notSelectedColor,
 
                       title: const Text('OFF/ON'),
                       onChanged: _allSwitch,
@@ -151,7 +152,7 @@ class _MyHomePageState extends State<MyHomePage> {
                             activeColor: Colors.lightBlueAccent,
                             activeTrackColor: const Color(0xffC1EFFF),
                             inactiveThumbColor: Colors.black38,
-                            inactiveTrackColor: const Color(0xffE5E5E5),
+                            inactiveTrackColor: _notSelectedColor,
 
                             /// アイコンを付けるならここ
                             // secondary: new Icon(
@@ -368,7 +369,41 @@ class _MyHomePageState extends State<MyHomePage> {
                 // await Future.delayed(const Duration(seconds: 2));
               },
               child: const Text('光らせる！'),
-            )
+            ),
+
+            const SizedBox(height: 10),
+
+            Container(
+                width: 350,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(10),
+                  color: const Color(0xffFFF5DB),
+                ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    IconButton(onPressed: (){
+                      // TODO: Notionページに飛ばす
+                    },
+                    icon: const Icon(Icons.help_outline)),
+                    Row(
+                      children: [
+                        IconButton(
+                            onPressed: (){
+                              launchUrl(Uri.parse('https://github.com/futa-ai/rainbow-button'));
+                            },
+                            icon: Image.network('https://raw.githubusercontent.com/futa-ai/rainbow-button/feature/footer/flutter_project/src/social-icon/github-mark.png?token=GHSAT0AAAAAABZL2OOMYFS5PCGEJL2SCIZQY4VAVTQ')
+                        ),
+                        IconButton(
+                            onPressed: (){
+                              launchUrl(Uri.parse('https://twitter.com/_futa_ai'));
+                            },
+                            icon: Image.network('https://raw.githubusercontent.com/futa-ai/rainbow-button/feature/footer/flutter_project/src/social-icon/twitter.png?token=GHSAT0AAAAAABZL2OOMPJ4A6JBMW2YKMS6CY4VAVXA')
+                        ),
+                      ],
+                    )
+                  ],
+                )),
           ],
         ),
       ),
@@ -477,7 +512,7 @@ class _MyHomePageState extends State<MyHomePage> {
             decoration: BoxDecoration(
               border: Border.all(color: Colors.grey),
               borderRadius: BorderRadius.circular(10),
-              color: (_gValue != rainbowValue) ? const Color(0xffE5E5E5) : null,
+              color: (_gValue != rainbowValue) ? _notSelectedColor : null,
               gradient: (_gValue == rainbowValue) ?
                 LinearGradient(
                   colors:

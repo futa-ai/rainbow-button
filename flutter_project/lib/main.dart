@@ -46,7 +46,10 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   bool _active = false;
-  void _changeSwitch(bool e) => setState(() => _active = e);
+  void _changeSwitch(bool e) {
+    e ? _isChecked[0] = _isChecked[2] = true :  _isChecked[0] = _isChecked[2] = false;
+    setState(() => _active = e);
+  }
   RadioValue _gValue = RadioValue.RAINBOW;
   @override
   Widget build(BuildContext context) {
@@ -56,6 +59,8 @@ class _MyHomePageState extends State<MyHomePage> {
         width: 350,
         child: Column(
           children: [
+            const SizedBox(height: 10),
+
             Container(
               width: 330,
               decoration: BoxDecoration(
@@ -70,6 +75,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     onTap: () {
                       setState(() {
                         _isOpened[0] = !_isOpened[0];
+                        _isOpened[1] = !_isOpened[1];
                       });
                     },
                     child: Column(
@@ -121,6 +127,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     onTap: () {
                       setState(() {
                         _isOpened[0] = !_isOpened[0];
+                        _isOpened[1] = !_isOpened[1];
                       });
                     },
                     child: Column(
@@ -140,42 +147,118 @@ class _MyHomePageState extends State<MyHomePage> {
                 ],
               ),
             ),
-            Column(
-              children: [
-                const Text('どのタグを光らせる？'),
-                Row(
-                  children: [
-                    Checkbox(
-                      checkColor: Colors.white,
-                      activeColor: Colors.blue,
-                      value: _isChecked[0],
-                      onChanged: (bool? value) {
-                        _handleCheckbox(0, !_isChecked[0]);
-                      },
+
+            const SizedBox(height: 10),
+
+            Container(
+              width: 330,
+              decoration: BoxDecoration(
+                border: Border.all(color: Colors.grey),
+                borderRadius: BorderRadius.circular(10),
+                color: Colors.white70,
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  InkWell(
+                    onTap: () {
+                      setState(() {
+                        _isOpened[0] = !_isOpened[0];
+                        _isOpened[1] = !_isOpened[1];
+                      });
+                    },
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: const [
+                        SizedBox(
+                          height: 30,
+                          child: Center(
+                            child: Text(
+                              'カスタム設定',
+                              style: TextStyle(
+                                fontSize: 20,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
-                    const Text('a'),
-                    Checkbox(
-                      checkColor: Colors.white,
-                      activeColor: Colors.blue,
-                      value: _isChecked[1],
-                      onChanged: (bool? value) {
-                        _handleCheckbox(1, !_isChecked[1]);
-                      },
+                  ),
+                      () {
+                    if (_isOpened[1]) {
+                      return Column(
+                        children: [
+                          Column(
+                            children: [
+                              const Text('どのタグを光らせる？'),
+                              Row(
+                                children: [
+                                  Checkbox(
+                                    checkColor: Colors.white,
+                                    activeColor: Colors.blue,
+                                    value: _isChecked[0],
+                                    onChanged: (bool? value) {
+                                      _handleCheckbox(0, !_isChecked[0]);
+                                    },
+                                  ),
+                                  const Text('a'),
+                                  Checkbox(
+                                    checkColor: Colors.white,
+                                    activeColor: Colors.blue,
+                                    value: _isChecked[1],
+                                    onChanged: (bool? value) {
+                                      _handleCheckbox(1, !_isChecked[1]);
+                                    },
+                                  ),
+                                  const Text('p'),
+                                  Checkbox(
+                                    checkColor: Colors.white,
+                                    activeColor: Colors.blue,
+                                    value: _isChecked[2],
+                                    onChanged: (bool? value) {
+                                      _handleCheckbox(2, !_isChecked[2]);
+                                    },
+                                  ),
+                                  const Text('button'),
+                                ],
+                              ),
+                            ],
+                          ),
+                          const SizedBox(height: 10),
+                          _colorChoiceButton(),
+                        ],
+                      );
+                    } else {
+                      return Container();
+                    }
+                  }(),
+                  InkWell(
+                    onTap: () {
+                      setState(() {
+                        _isOpened[0] = !_isOpened[0];
+                        _isOpened[1] = !_isOpened[1];
+                      });
+                    },
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        SizedBox(
+                          width: 330,
+                          child: Icon(
+                            (_isOpened[1])
+                                ? Icons.expand_less
+                                : Icons.expand_more,
+                          ),
+                        ),
+                      ],
                     ),
-                    const Text('p'),
-                    Checkbox(
-                      checkColor: Colors.white,
-                      activeColor: Colors.blue,
-                      value: _isChecked[2],
-                      onChanged: (bool? value) {
-                        _handleCheckbox(2, !_isChecked[2]);
-                      },
-                    ),
-                    const Text('button'),
-                  ],
-                ),
-              ],
+                  ),
+                ],
+              ),
             ),
+
+            const SizedBox(height: 10),
+
             ElevatedButton(
               onPressed: () async {
                 switch (_gValue) {

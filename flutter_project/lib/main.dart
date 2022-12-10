@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_project/javascript.dart';
+import "dart:async";
 
 void main() {
   runApp(const MyApp());
@@ -252,6 +254,8 @@ class _MyHomePageState extends State<MyHomePage> {
                 if(_isChecked[1]) tagName.add('p');
                 if(_isChecked[2]) tagName.add('button');
                 debugPrint('タグは$tagNameです');
+                await new Future.delayed(new Duration(seconds: 1));
+                changeColor(tagName, colorName);
               },
               child: const Text('光らせる！'),
             )

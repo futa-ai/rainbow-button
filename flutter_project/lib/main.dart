@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -19,8 +20,20 @@ class MyApp extends StatelessWidget {
   }
 }
 
-enum RadioValue { RAINBOW, BLACK, BROWN, ORANGE, YELLOW, GREEN, BLUE, PURPLE, PINK, RED }
+enum RadioValue {
+  RAINBOW,
+  BLACK,
+  BROWN,
+  ORANGE,
+  YELLOW,
+  GREEN,
+  BLUE,
+  PURPLE,
+  PINK,
+  RED
+}
 var _isChecked = List.filled(3, false);
+var _isOpened = [true, false, false];
 List<String> tagName = [];
 String colorName = "";
 
@@ -43,136 +56,201 @@ class _MyHomePageState extends State<MyHomePage> {
         width: 350,
         child: Column(
           children: [
-            Column(
-              children: [
-                const Text('まずはここから'),
-                SwitchListTile(
-                  value: _active,
-                  activeColor: Colors.orange,
-                  activeTrackColor: Colors.red,
-                  inactiveThumbColor: Colors.blue,
-                  inactiveTrackColor: Colors.grey,
-                  /// アイコンを付けるならここ
-                  // secondary: new Icon(
-                  //   Icons.thumb_up,
-                  //   color: _active ? Colors.orange[700] : Colors.grey[500],
-                  //   size: 50.0,
-                  // ),
-                  title: const Text('ボタンを光らせる？'),
-                  subtitle: const Text('サブタイトル'),
-                  onChanged: _changeSwitch,
-                ),
-                Row(
-                  children: [
-                    SizedBox(
-                      width: 150,
-                      child: RadioListTile(
-                        title: const Text('Rainbow'),
-                        value: RadioValue.RAINBOW,
-                        groupValue: _gValue,
-                        onChanged: (value) => _onRadioSelected(value),
-                      ),
+            Container(
+              width: 330,
+              // height: 60,
+              decoration: BoxDecoration(
+                border: Border.all(color: Colors.grey),
+                borderRadius: BorderRadius.circular(10),
+                color: Colors.white70,
+              ),
+              child: Column(
+                children: [
+                  InkWell(
+                    onTap: () {
+                      debugPrint('押した');
+                      setState(() {
+                        _isOpened[0] = !_isOpened[0];
+                      });
+                    },
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: const [
+                        SizedBox(
+                          height: 30,
+                          child: Center(
+                            child: Text(
+                              'まずはここから',
+                              style: TextStyle(
+                                fontSize: 20,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
-                    SizedBox(
-                      width: 150,
-                      child: RadioListTile(
-                        title: const Text('Black'),
-                        value: RadioValue.BLACK,
-                        groupValue: _gValue,
-                        onChanged: (value) => _onRadioSelected(value),
-                      ),
+                  ),
+                  // (_isOpened[0]) ?
+                  () {
+                    if (_isOpened[0]) {
+                      return Column(
+                        children: [
+                          SwitchListTile(
+                            value: _active,
+                            activeColor: Colors.orange,
+                            activeTrackColor: Colors.red,
+                            inactiveThumbColor: Colors.blue,
+                            inactiveTrackColor: Colors.grey,
+
+                            /// アイコンを付けるならここ
+                            // secondary: new Icon(
+                            //   Icons.thumb_up,
+                            //   color: _active ? Colors.orange[700] : Colors.grey[500],
+                            //   size: 50.0,
+                            // ),
+                            title: const Text('ボタンを光らせる？'),
+                            subtitle: const Text('サブタイトル'),
+                            onChanged: _changeSwitch,
+                          ),
+                          Row(
+                            children: [
+                              SizedBox(
+                                width: 150,
+                                child: RadioListTile(
+                                  title: const Text('Rainbow'),
+                                  value: RadioValue.RAINBOW,
+                                  groupValue: _gValue,
+                                  onChanged: (value) => _onRadioSelected(value),
+                                ),
+                              ),
+                              SizedBox(
+                                width: 150,
+                                child: RadioListTile(
+                                  title: const Text('Black'),
+                                  value: RadioValue.BLACK,
+                                  groupValue: _gValue,
+                                  onChanged: (value) => _onRadioSelected(value),
+                                ),
+                              ),
+                            ],
+                          ),
+                          Row(
+                            children: [
+                              SizedBox(
+                                width: 150,
+                                child: RadioListTile(
+                                  title: const Text('Brown'),
+                                  value: RadioValue.BROWN,
+                                  groupValue: _gValue,
+                                  onChanged: (value) => _onRadioSelected(value),
+                                ),
+                              ),
+                              SizedBox(
+                                width: 150,
+                                child: RadioListTile(
+                                  title: const Text('Orange'),
+                                  value: RadioValue.ORANGE,
+                                  groupValue: _gValue,
+                                  onChanged: (value) => _onRadioSelected(value),
+                                ),
+                              ),
+                            ],
+                          ),
+                          Row(
+                            children: [
+                              SizedBox(
+                                width: 150,
+                                child: RadioListTile(
+                                  title: const Text('Yellow'),
+                                  value: RadioValue.YELLOW,
+                                  groupValue: _gValue,
+                                  onChanged: (value) => _onRadioSelected(value),
+                                ),
+                              ),
+                              SizedBox(
+                                width: 150,
+                                child: RadioListTile(
+                                  title: const Text('Green'),
+                                  value: RadioValue.GREEN,
+                                  groupValue: _gValue,
+                                  onChanged: (value) => _onRadioSelected(value),
+                                ),
+                              ),
+                            ],
+                          ),
+                          Row(
+                            children: [
+                              SizedBox(
+                                width: 150,
+                                child: RadioListTile(
+                                  title: const Text('Blue'),
+                                  value: RadioValue.BLUE,
+                                  groupValue: _gValue,
+                                  onChanged: (value) => _onRadioSelected(value),
+                                ),
+                              ),
+                              SizedBox(
+                                width: 150,
+                                child: RadioListTile(
+                                  title: const Text('Purple'),
+                                  value: RadioValue.PURPLE,
+                                  groupValue: _gValue,
+                                  onChanged: (value) => _onRadioSelected(value),
+                                ),
+                              ),
+                            ],
+                          ),
+                          Row(
+                            children: [
+                              SizedBox(
+                                width: 150,
+                                child: RadioListTile(
+                                  title: const Text('Pink'),
+                                  value: RadioValue.PINK,
+                                  groupValue: _gValue,
+                                  onChanged: (value) => _onRadioSelected(value),
+                                ),
+                              ),
+                              SizedBox(
+                                width: 150,
+                                child: RadioListTile(
+                                  title: const Text('Red'),
+                                  value: RadioValue.RED,
+                                  groupValue: _gValue,
+                                  onChanged: (value) => _onRadioSelected(value),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ],
+                      );
+                    } else {
+                      return Container();
+                    }
+                  }(),
+                  InkWell(
+                    onTap: () {
+                      debugPrint('押した');
+                      setState(() {
+                        _isOpened[0] = !_isOpened[0];
+                      });
+                    },
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        SizedBox(
+                          width: 330,
+                          child: Icon(
+                            (_isOpened[0])
+                                ? Icons.expand_less
+                                : Icons.expand_more,
+                          ),
+                        ),
+                      ],
                     ),
-                  ],
-                ),
-                Row(
-                  children: [
-                    SizedBox(
-                      width: 150,
-                      child: RadioListTile(
-                        title: const Text('Brown'),
-                        value: RadioValue.BROWN,
-                        groupValue: _gValue,
-                        onChanged: (value) => _onRadioSelected(value),
-                      ),
-                    ),
-                    SizedBox(
-                      width: 150,
-                      child: RadioListTile(
-                        title: const Text('Orange'),
-                        value: RadioValue.ORANGE,
-                        groupValue: _gValue,
-                        onChanged: (value) => _onRadioSelected(value),
-                      ),
-                    ),
-                  ],
-                ),
-                Row(
-                  children: [
-                    SizedBox(
-                      width: 150,
-                      child: RadioListTile(
-                        title: const Text('Yellow'),
-                        value: RadioValue.YELLOW,
-                        groupValue: _gValue,
-                        onChanged: (value) => _onRadioSelected(value),
-                      ),
-                    ),
-                    SizedBox(
-                      width: 150,
-                      child: RadioListTile(
-                        title: const Text('Green'),
-                        value: RadioValue.GREEN,
-                        groupValue: _gValue,
-                        onChanged: (value) => _onRadioSelected(value),
-                      ),
-                    ),
-                  ],
-                ),
-                Row(
-                  children: [
-                    SizedBox(
-                      width: 150,
-                      child: RadioListTile(
-                        title: const Text('Blue'),
-                        value: RadioValue.BLUE,
-                        groupValue: _gValue,
-                        onChanged: (value) => _onRadioSelected(value),
-                      ),
-                    ),
-                    SizedBox(
-                      width: 150,
-                      child: RadioListTile(
-                        title: const Text('Purple'),
-                        value: RadioValue.PURPLE,
-                        groupValue: _gValue,
-                        onChanged: (value) => _onRadioSelected(value),
-                      ),
-                    ),
-                  ],
-                ),
-                Row(
-                  children: [
-                    SizedBox(
-                      width: 150,
-                      child: RadioListTile(
-                        title: const Text('Pink'),
-                        value: RadioValue.PINK,
-                        groupValue: _gValue,
-                        onChanged: (value) => _onRadioSelected(value),
-                      ),
-                    ),
-                    SizedBox(
-                      width: 150,
-                      child: RadioListTile(
-                        title: const Text('Red'),
-                        value: RadioValue.RED,
-                        groupValue: _gValue,
-                        onChanged: (value) => _onRadioSelected(value),
-                      ),
-                    ),
-                  ],
-                ),
-              ],
+                  ),
+                ],
+              ),
             ),
             Column(
               children: [
@@ -211,8 +289,8 @@ class _MyHomePageState extends State<MyHomePage> {
               ],
             ),
             ElevatedButton(
-              onPressed: () async{
-                switch(_gValue){
+              onPressed: () async {
+                switch (_gValue) {
                   case RadioValue.RAINBOW:
                     colorName = "rainbow";
                     break;
@@ -248,9 +326,9 @@ class _MyHomePageState extends State<MyHomePage> {
                     break;
                 }
                 debugPrint('色は$colorNameです');
-                if(_isChecked[0]) tagName.add('a');
-                if(_isChecked[1]) tagName.add('p');
-                if(_isChecked[2]) tagName.add('button');
+                if (_isChecked[0]) tagName.add('a');
+                if (_isChecked[1]) tagName.add('p');
+                if (_isChecked[2]) tagName.add('button');
                 debugPrint('タグは$tagNameです');
               },
               child: const Text('光らせる！'),
@@ -265,7 +343,6 @@ class _MyHomePageState extends State<MyHomePage> {
     setState(() {
       _gValue = value;
     });
-
   }
 
   void _handleCheckbox(int i, bool value) {
@@ -274,4 +351,3 @@ class _MyHomePageState extends State<MyHomePage> {
     });
   }
 }
-

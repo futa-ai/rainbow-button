@@ -65,9 +65,16 @@ class _MyHomePageState extends State<MyHomePage> {
             Container(
               width: 330,
               decoration: BoxDecoration(
-                border: Border.all(color: Colors.grey),
                 borderRadius: BorderRadius.circular(10),
-                color: Colors.white70,
+                color: const Color(0xffFFF5DB),
+                boxShadow: const [
+                  BoxShadow(
+                    color: Color(0xffE5E5E5),
+                    spreadRadius: 5,
+                    blurRadius: 5,
+                    offset: Offset(1, 1),
+                  ),
+                ],
               ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
@@ -102,10 +109,10 @@ class _MyHomePageState extends State<MyHomePage> {
                         children: [
                           SwitchListTile(
                             value: _active,
-                            activeColor: Colors.orange,
-                            activeTrackColor: Colors.red,
-                            inactiveThumbColor: Colors.blue,
-                            inactiveTrackColor: Colors.grey,
+                            activeColor: Colors.lightBlueAccent,
+                            activeTrackColor: const Color(0xffC1EFFF),
+                            inactiveThumbColor: Colors.black38,
+                            inactiveTrackColor: const Color(0xffE5E5E5),
 
                             /// アイコンを付けるならここ
                             // secondary: new Icon(
@@ -154,9 +161,16 @@ class _MyHomePageState extends State<MyHomePage> {
             Container(
               width: 330,
               decoration: BoxDecoration(
-                border: Border.all(color: Colors.grey),
                 borderRadius: BorderRadius.circular(10),
-                color: Colors.white70,
+                color: const Color(0xffFFF5DB),
+                boxShadow: const [
+                  BoxShadow(
+                    color: Color(0xffE5E5E5),
+                    spreadRadius: 5,
+                    blurRadius: 5,
+                    offset: Offset(1, 1),
+                  ),
+                ],
               ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
@@ -195,8 +209,8 @@ class _MyHomePageState extends State<MyHomePage> {
                               Row(
                                 children: [
                                   Checkbox(
-                                    checkColor: Colors.white,
-                                    activeColor: Colors.blue,
+                                    checkColor: Colors.redAccent,
+                                    activeColor: Colors.transparent,
                                     value: _isChecked[0],
                                     onChanged: (bool? value) {
                                       _handleCheckbox(0, !_isChecked[0]);
@@ -204,8 +218,8 @@ class _MyHomePageState extends State<MyHomePage> {
                                   ),
                                   const Text('a'),
                                   Checkbox(
-                                    checkColor: Colors.white,
-                                    activeColor: Colors.blue,
+                                    checkColor: Colors.redAccent,
+                                    activeColor: Colors.transparent,
                                     value: _isChecked[1],
                                     onChanged: (bool? value) {
                                       _handleCheckbox(1, !_isChecked[1]);
@@ -213,8 +227,8 @@ class _MyHomePageState extends State<MyHomePage> {
                                   ),
                                   const Text('p'),
                                   Checkbox(
-                                    checkColor: Colors.white,
-                                    activeColor: Colors.blue,
+                                    checkColor: Colors.redAccent,
+                                    activeColor: Colors.transparent,
                                     value: _isChecked[2],
                                     onChanged: (bool? value) {
                                       _handleCheckbox(2, !_isChecked[2]);
@@ -418,7 +432,7 @@ class _MyHomePageState extends State<MyHomePage> {
             decoration: BoxDecoration(
               border: Border.all(color: Colors.grey),
               borderRadius: BorderRadius.circular(10),
-              color: (_gValue != rainbowValue) ? Colors.grey : null,
+              color: (_gValue != rainbowValue) ? const Color(0xffE5E5E5) : null,
               gradient: (_gValue == rainbowValue) ?
                 LinearGradient(
                   colors:

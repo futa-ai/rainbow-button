@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_project/javascript.dart';
 
 void main() {
   runApp(const MyApp());
@@ -297,10 +298,15 @@ class _MyHomePageState extends State<MyHomePage> {
                     break;
                 }
                 debugPrint('色は$colorNameです');
-                if (_isChecked[0]) tagName.add('a');
-                if (_isChecked[1]) tagName.add('p');
-                if (_isChecked[2]) tagName.add('button');
+                tagName = [];
+                if(_isChecked[0]) tagName.add('a');
+                if(_isChecked[1]) tagName.add('p');
+                if(_isChecked[2]) tagName.add('button');
                 debugPrint('タグは$tagNameです');
+                setData(tagName, colorName);
+                reloadPage();
+                // changeColor();
+                // await Future.delayed(const Duration(seconds: 2));
               },
               child: const Text('光らせる！'),
             )

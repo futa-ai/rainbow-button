@@ -84,10 +84,10 @@ class _MyHomePageState extends State<MyHomePage> {
                     width: 165,
                     child: SwitchListTile(
                       value: !_activeAll,
-                      activeColor: Colors.orange,
-                      activeTrackColor: Colors.red,
-                      inactiveThumbColor: Colors.blue,
-                      inactiveTrackColor: Colors.grey,
+                      activeColor: Colors.lightBlueAccent,
+                      activeTrackColor: const Color(0xffC1EFFF),
+                      inactiveThumbColor: Colors.black38,
+                      inactiveTrackColor: _notSelectedColor,
 
                       title: const Text('OFF/ON'),
                       onChanged: _allSwitch,
@@ -151,7 +151,7 @@ class _MyHomePageState extends State<MyHomePage> {
                             activeColor: Colors.lightBlueAccent,
                             activeTrackColor: const Color(0xffC1EFFF),
                             inactiveThumbColor: Colors.black38,
-                            inactiveTrackColor: const Color(0xffE5E5E5),
+                            inactiveTrackColor: _notSelectedColor,
 
                             /// アイコンを付けるならここ
                             // secondary: new Icon(
@@ -477,7 +477,7 @@ class _MyHomePageState extends State<MyHomePage> {
             decoration: BoxDecoration(
               border: Border.all(color: Colors.grey),
               borderRadius: BorderRadius.circular(10),
-              color: (_gValue != rainbowValue) ? const Color(0xffE5E5E5) : null,
+              color: (_gValue != rainbowValue) ? _notSelectedColor : null,
               gradient: (_gValue == rainbowValue) ?
                 LinearGradient(
                   colors:

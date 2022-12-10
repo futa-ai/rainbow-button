@@ -418,7 +418,7 @@ class _MyHomePageState extends State<MyHomePage> {
             decoration: BoxDecoration(
               border: Border.all(color: Colors.grey),
               borderRadius: BorderRadius.circular(10),
-              color: (_gValue != rainbowValue) ? Colors.grey : null,
+              color: (_gValue != rainbowValue) ? const Color(0xffE5E5E5) : null,
               gradient: (_gValue == rainbowValue) ?
                 LinearGradient(
                   colors:

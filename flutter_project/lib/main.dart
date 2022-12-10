@@ -385,6 +385,18 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   Widget _colorButton(String colorName, RadioValue rainbowValue){
+    const Map<String, List<Color>> _buttonColor = {
+      "rainbow": [Color(0xffff00ff), Color(0xffffff00), Color(0xff00ffff), Color(0xffff00ff)],
+      "black":   [Color(0xff696969), Color(0xffA9A9A9), Color(0xffDCDCDC)],
+      "brown":   [Color(0xff8B4513), Color(0xffDEB887), Color(0xffFAEBD7)],
+      "orange":  [Color(0xffFF8C00), Color(0xffFFA07A), Color(0xffFFDEAD)],
+      "yellow":  [Color(0xffFFFF00), Color(0xffF0E68C), Color(0xffFFFFE0)],
+      "green":   [Color(0xff32CD32), Color(0xff90EE90), Color(0xffF0FFF0)],
+      "blue":    [Color(0xff0000FF), Color(0xff4169E1), Color(0xff87CEFA)],
+      "purple":  [Color(0xff9400D3), Color(0xff6A5ACD), Color(0xffE6E6FA)],
+      "pink":    [Color(0xffFF1493), Color(0xffFF69B4), Color(0xffFFC0CB)],
+      "red":     [Color(0xffFF0000), Color(0xffF08080), Color(0xffFFE4E1)]
+    };
     return InkWell(
       onTap: () {
         setState(() {
@@ -407,65 +419,25 @@ class _MyHomePageState extends State<MyHomePage> {
                 (){
                   switch (_gValue) {
                     case RadioValue.RAINBOW:
-                      return [
-                        Colors.lightBlue.shade200,
-                        Colors.yellow.shade200,
-                        Colors.deepPurple.shade200
-                      ];
+                      return _buttonColor['rainbow']!;
                     case RadioValue.BLACK:
-                      return [
-                        Colors.lightBlue.shade200,
-                        Colors.yellow.shade200,
-                        Colors.deepPurple.shade200
-                      ];
+                      return _buttonColor['black']!;
                     case RadioValue.BROWN:
-                      return [
-                        Colors.lightBlue.shade200,
-                        Colors.yellow.shade200,
-                        Colors.deepPurple.shade200
-                      ];
+                      return _buttonColor['brown']!;
                     case RadioValue.ORANGE:
-                      return [
-                        Colors.lightBlue.shade200,
-                        Colors.yellow.shade200,
-                        Colors.deepPurple.shade200
-                      ];
+                      return _buttonColor['orange']!;
                     case RadioValue.YELLOW:
-                      return [
-                        Colors.lightBlue.shade200,
-                        Colors.yellow.shade200,
-                        Colors.deepPurple.shade200
-                      ];
+                      return _buttonColor['yellow']!;
                     case RadioValue.GREEN:
-                      return [
-                        Colors.lightBlue.shade200,
-                        Colors.yellow.shade200,
-                        Colors.deepPurple.shade200
-                      ];
+                      return _buttonColor['green']!;
                     case RadioValue.BLUE:
-                      return [
-                        Colors.lightBlue.shade200,
-                        Colors.yellow.shade200,
-                        Colors.deepPurple.shade200
-                      ];
+                      return _buttonColor['blue']!;
                     case RadioValue.PURPLE:
-                      return [
-                        Colors.lightBlue.shade200,
-                        Colors.yellow.shade200,
-                        Colors.deepPurple.shade200
-                      ];
+                      return _buttonColor['purple']!;
                     case RadioValue.PINK:
-                      return [
-                        Colors.lightBlue.shade200,
-                        Colors.yellow.shade200,
-                        Colors.deepPurple.shade200
-                      ];
+                      return _buttonColor['pink']!;
                     case RadioValue.RED:
-                      return [
-                        Colors.lightBlue.shade200,
-                        Colors.yellow.shade200,
-                        Colors.deepPurple.shade200
-                      ];
+                      return _buttonColor['red']!;
                     default:
                       return [
                         Colors.deepPurple.shade200

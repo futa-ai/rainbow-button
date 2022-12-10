@@ -102,10 +102,10 @@ class _MyHomePageState extends State<MyHomePage> {
                         children: [
                           SwitchListTile(
                             value: _active,
-                            activeColor: Colors.orange,
-                            activeTrackColor: Colors.red,
-                            inactiveThumbColor: Colors.blue,
-                            inactiveTrackColor: Colors.grey,
+                            activeColor: Colors.lightBlueAccent,
+                            activeTrackColor: const Color(0xffC1EFFF),
+                            inactiveThumbColor: Colors.black38,
+                            inactiveTrackColor: const Color(0xffE5E5E5),
 
                             /// アイコンを付けるならここ
                             // secondary: new Icon(

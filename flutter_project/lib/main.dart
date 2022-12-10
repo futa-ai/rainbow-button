@@ -209,8 +209,8 @@ class _MyHomePageState extends State<MyHomePage> {
                               Row(
                                 children: [
                                   Checkbox(
-                                    checkColor: Colors.white,
-                                    activeColor: Colors.blue,
+                                    checkColor: Colors.redAccent,
+                                    activeColor: Colors.transparent,
                                     value: _isChecked[0],
                                     onChanged: (bool? value) {
                                       _handleCheckbox(0, !_isChecked[0]);
@@ -218,8 +218,8 @@ class _MyHomePageState extends State<MyHomePage> {
                                   ),
                                   const Text('a'),
                                   Checkbox(
-                                    checkColor: Colors.white,
-                                    activeColor: Colors.blue,
+                                    checkColor: Colors.redAccent,
+                                    activeColor: Colors.transparent,
                                     value: _isChecked[1],
                                     onChanged: (bool? value) {
                                       _handleCheckbox(1, !_isChecked[1]);
@@ -227,8 +227,8 @@ class _MyHomePageState extends State<MyHomePage> {
                                   ),
                                   const Text('p'),
                                   Checkbox(
-                                    checkColor: Colors.white,
-                                    activeColor: Colors.blue,
+                                    checkColor: Colors.redAccent,
+                                    activeColor: Colors.transparent,
                                     value: _isChecked[2],
                                     onChanged: (bool? value) {
                                       _handleCheckbox(2, !_isChecked[2]);

@@ -65,9 +65,16 @@ class _MyHomePageState extends State<MyHomePage> {
             Container(
               width: 330,
               decoration: BoxDecoration(
-                border: Border.all(color: Colors.grey),
                 borderRadius: BorderRadius.circular(10),
-                color: Colors.white70,
+                color: const Color(0xffFFF5DB),
+                boxShadow: const [
+                  BoxShadow(
+                    color: Color(0xffE5E5E5),
+                    spreadRadius: 5,
+                    blurRadius: 5,
+                    offset: Offset(1, 1),
+                  ),
+                ],
               ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
@@ -154,9 +161,16 @@ class _MyHomePageState extends State<MyHomePage> {
             Container(
               width: 330,
               decoration: BoxDecoration(
-                border: Border.all(color: Colors.grey),
                 borderRadius: BorderRadius.circular(10),
-                color: Colors.white70,
+                color: const Color(0xffFFF5DB),
+                boxShadow: const [
+                  BoxShadow(
+                    color: Color(0xffE5E5E5),
+                    spreadRadius: 5,
+                    blurRadius: 5,
+                    offset: Offset(1, 1),
+                  ),
+                ],
               ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,

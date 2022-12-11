@@ -10,7 +10,7 @@ function setData(tagNames, colorName) {
 }
 
 function reloadPage() {
-    const tags = ["a", "p", "button"];
+    const tags = ["h1", "h2", "h3", "h4", "h5", "h6", "p", "a", "button", "ul", "ol", "img", "table", "tr", "th", "section", "article", "nav", "main", "footer"];
     chrome.storage.local.get(null, function(items) {
         // ストレージからデータ取得
         var tagNames = items.tagNames;      // tagNames : list of string
@@ -45,7 +45,7 @@ function changeColor() {
                     pink: "deeppink, hotpink, pink, hotpink, deeppink",
                     red: "red, lightcoral, mistyrose, lightcoral, red"
                 };  // 色の選択肢
-    const tags = ["a", "p", "button"];  // タグの選択肢になる
+    const tags = ["h1", "h2", "h3", "h4", "h5", "h6", "p", "a", "button", "ul", "ol", "img", "table", "tr", "th", "section", "article", "nav", "main", "footer"];  // タグの選択肢になる
     chrome.storage.local.get(null, function(items) {
         // ストレージからデータ取得
         var tagNames = items.tagNames;      // tagNames : list of string

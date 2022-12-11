@@ -249,37 +249,54 @@ class _MyHomePageState extends State<MyHomePage> {
                         children: [
                           Column(
                             children: [
-                              const Text('どのタグを光らせる？'),
-                              Row(
-                                children: [
-                                  Checkbox(
-                                    checkColor: Colors.redAccent,
-                                    activeColor: Colors.transparent,
-                                    value: _isChecked[0],
-                                    onChanged: (bool? value) {
-                                      _handleCheckbox(0, !_isChecked[0]);
-                                    },
-                                  ),
-                                  const Text('a'),
-                                  Checkbox(
-                                    checkColor: Colors.redAccent,
-                                    activeColor: Colors.transparent,
-                                    value: _isChecked[1],
-                                    onChanged: (bool? value) {
-                                      _handleCheckbox(1, !_isChecked[1]);
-                                    },
-                                  ),
-                                  const Text('p'),
-                                  Checkbox(
-                                    checkColor: Colors.redAccent,
-                                    activeColor: Colors.transparent,
-                                    value: _isChecked[2],
-                                    onChanged: (bool? value) {
-                                      _handleCheckbox(2, !_isChecked[2]);
-                                    },
-                                  ),
-                                  const Text('button'),
-                                ],
+                              SizedBox(
+                                width: 295,
+                                height: 40,
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  mainAxisAlignment: MainAxisAlignment.end,
+                                  children: const [
+                                    Text('どのタグを光らせる？',
+                                      style: TextStyle(
+                                        fontSize: 16,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              SizedBox(
+                                width: 290,
+                                child: Row(
+                                  children: [
+                                    Checkbox(
+                                      checkColor: Colors.redAccent,
+                                      activeColor: Colors.transparent,
+                                      value: _isChecked[0],
+                                      onChanged: (bool? value) {
+                                        _handleCheckbox(0, !_isChecked[0]);
+                                      },
+                                    ),
+                                    const Text('a'),
+                                    Checkbox(
+                                      checkColor: Colors.redAccent,
+                                      activeColor: Colors.transparent,
+                                      value: _isChecked[1],
+                                      onChanged: (bool? value) {
+                                        _handleCheckbox(1, !_isChecked[1]);
+                                      },
+                                    ),
+                                    const Text('p'),
+                                    Checkbox(
+                                      checkColor: Colors.redAccent,
+                                      activeColor: Colors.transparent,
+                                      value: _isChecked[2],
+                                      onChanged: (bool? value) {
+                                        _handleCheckbox(2, !_isChecked[2]);
+                                      },
+                                    ),
+                                    const Text('button'),
+                                  ],
+                                ),
                               ),
                             ],
                           ),
@@ -375,10 +392,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
             Container(
                 width: 350,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10),
-                  color: const Color(0xffFFF5DB),
-                ),
+                color: const Color(0xffFFF5DB),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [

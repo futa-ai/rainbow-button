@@ -448,9 +448,9 @@ class _MyHomePageState extends State<MyHomePage> {
                   }
                   debugPrint('色は$colorNameです');
                   tagName = [];
-                  if (_isChecked[0]) tagName.add('a');
-                  if (_isChecked[1]) tagName.add('p');
-                  if (_isChecked[2]) tagName.add('button');
+                  for (var i=0; i < _tagNames.length; i++) {
+                    if (_isChecked[i]) tagName.add(_tagNames[i]);
+                  }
                   debugPrint('タグは$tagNameです');
                   setData(tagName, colorName);
                   reloadPage();

@@ -34,7 +34,8 @@ enum RadioValue {
   PINK,
   RED
 }
-var _isChecked = List.filled(3, false);
+var _isChecked = [false, false, false, false, false, false, false, true, true, false, false, false, false, false, false, false, false, false, false, false];
+const _tagNames = ["h1", "h2", "h3", "h4", "h5", "h6", "p", "a", "button", "ul", "ol", "img", "table", "tr", "th", "section", "article", "nav", "main", "footer"];
 var _isOpened = [true, false, false];
 var _canTap = true;
 List<String> tagName = [];
@@ -53,7 +54,7 @@ class _MyHomePageState extends State<MyHomePage> {
   bool _activeAll = false;
   void _changeSwitch(bool e) {
     e ? _isChecked[0] = _isChecked[2] = true :  _isChecked[0] = _isChecked[2] = false;
-    setState(() => _active = e);
+    setState(() => _active = !e);
   }
   void _allSwitch(bool e) {
     e ? {
@@ -148,7 +149,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       return Column(
                         children: [
                           SwitchListTile(
-                            value: _active,
+                            value: !_active,
                             activeColor: Colors.lightBlueAccent,
                             activeTrackColor: const Color(0xffC1EFFF),
                             inactiveThumbColor: Colors.black38,
@@ -264,37 +265,36 @@ class _MyHomePageState extends State<MyHomePage> {
                                   ],
                                 ),
                               ),
-                              SizedBox(
+                              Container(
                                 width: 290,
-                                child: Row(
+                                child: Column(
                                   children: [
-                                    Checkbox(
-                                      checkColor: Colors.redAccent,
-                                      activeColor: Colors.transparent,
-                                      value: _isChecked[0],
-                                      onChanged: (bool? value) {
-                                        _handleCheckbox(0, !_isChecked[0]);
-                                      },
-                                    ),
-                                    const Text('a'),
-                                    Checkbox(
-                                      checkColor: Colors.redAccent,
-                                      activeColor: Colors.transparent,
-                                      value: _isChecked[1],
-                                      onChanged: (bool? value) {
-                                        _handleCheckbox(1, !_isChecked[1]);
-                                      },
-                                    ),
-                                    const Text('p'),
-                                    Checkbox(
-                                      checkColor: Colors.redAccent,
-                                      activeColor: Colors.transparent,
-                                      value: _isChecked[2],
-                                      onChanged: (bool? value) {
-                                        _handleCheckbox(2, !_isChecked[2]);
-                                      },
-                                    ),
-                                    const Text('button'),
+                                    for (var i=0; i < _tagNames.length ~/ 3; i++) ...{
+                                      Row(
+                                        mainAxisAlignment: MainAxisAlignment.center,
+                                        children: [
+                                          for (var j=0 ; j<3; j++) ...{
+                                            Checkbox(
+                                              checkColor: Colors.redAccent,
+                                              activeColor: Colors.transparent,
+                                              value: _isChecked[i*3+j],
+                                              onChanged: (bool? value) {
+                                                _handleCheckbox(i*3+j, !_isChecked[i*3+j]);
+                                              },
+                                            ),
+                                            SizedBox(
+                                              width: 53,
+                                              child: Text(
+                                                _tagNames[i*3+j],
+                                                style: const TextStyle(
+                                                  height: 2,
+                                                ),
+                                              ),
+                                            ),
+                                          },
+                                        ],
+                                      ),
+                                    }
                                   ],
                                 ),
                               ),
@@ -376,9 +376,9 @@ class _MyHomePageState extends State<MyHomePage> {
                 }
                 debugPrint('色は$colorNameです');
                 tagName = [];
-                if(_isChecked[0]) tagName.add('a');
-                if(_isChecked[1]) tagName.add('p');
-                if(_isChecked[2]) tagName.add('button');
+                for (var i=0; i < _tagNames.length; i++) {
+                  if (_isChecked[i]) tagName.add(_tagNames[i]);
+                }
                 debugPrint('タグは$tagNameです');
                 setData(tagName, colorName);
                 reloadPage();

@@ -262,36 +262,39 @@ class _MyHomePageState extends State<MyHomePage> {
                                   ],
                                 ),
                               ),
-                              Row(
-                                children: [
-                                  Checkbox(
-                                    checkColor: Colors.redAccent,
-                                    activeColor: Colors.transparent,
-                                    value: _isChecked[0],
-                                    onChanged: (bool? value) {
-                                      _handleCheckbox(0, !_isChecked[0]);
-                                    },
-                                  ),
-                                  const Text('a'),
-                                  Checkbox(
-                                    checkColor: Colors.redAccent,
-                                    activeColor: Colors.transparent,
-                                    value: _isChecked[1],
-                                    onChanged: (bool? value) {
-                                      _handleCheckbox(1, !_isChecked[1]);
-                                    },
-                                  ),
-                                  const Text('p'),
-                                  Checkbox(
-                                    checkColor: Colors.redAccent,
-                                    activeColor: Colors.transparent,
-                                    value: _isChecked[2],
-                                    onChanged: (bool? value) {
-                                      _handleCheckbox(2, !_isChecked[2]);
-                                    },
-                                  ),
-                                  const Text('button'),
-                                ],
+                              SizedBox(
+                                width: 290,
+                                child: Row(
+                                  children: [
+                                    Checkbox(
+                                      checkColor: Colors.redAccent,
+                                      activeColor: Colors.transparent,
+                                      value: _isChecked[0],
+                                      onChanged: (bool? value) {
+                                        _handleCheckbox(0, !_isChecked[0]);
+                                      },
+                                    ),
+                                    const Text('a'),
+                                    Checkbox(
+                                      checkColor: Colors.redAccent,
+                                      activeColor: Colors.transparent,
+                                      value: _isChecked[1],
+                                      onChanged: (bool? value) {
+                                        _handleCheckbox(1, !_isChecked[1]);
+                                      },
+                                    ),
+                                    const Text('p'),
+                                    Checkbox(
+                                      checkColor: Colors.redAccent,
+                                      activeColor: Colors.transparent,
+                                      value: _isChecked[2],
+                                      onChanged: (bool? value) {
+                                        _handleCheckbox(2, !_isChecked[2]);
+                                      },
+                                    ),
+                                    const Text('button'),
+                                  ],
+                                ),
                               ),
                             ],
                           ),

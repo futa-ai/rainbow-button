@@ -251,10 +251,12 @@ class _MyHomePageState extends State<MyHomePage> {
                             children: [
                               SizedBox(
                                 width: 295,
+                                height: 40,
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
+                                  mainAxisAlignment: MainAxisAlignment.end,
                                   children: const [
-                                    Text('どのタグを光らせる',
+                                    Text('どのタグを光らせる？',
                                       style: TextStyle(
                                         fontSize: 16,
                                       ),

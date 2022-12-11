@@ -392,13 +392,13 @@ class _MyHomePageState extends State<MyHomePage> {
                             onPressed: (){
                               launchUrl(Uri.parse('https://github.com/futa-ai/rainbow-button'));
                             },
-                            icon: Image.network('https://raw.githubusercontent.com/futa-ai/rainbow-button/develop/flutter_project/src/social-icon/github-mark.png?token=GHSAT0AAAAAABZL2OOMCRZRL5D7FIJMIVKEY4VHQIA')
+                            icon: Image.network('https://cdn.discordapp.com/attachments/1037739356414287956/1051260264168833157/github-mark.png')
                         ),
                         IconButton(
                             onPressed: (){
                               launchUrl(Uri.parse('https://twitter.com/_futa_ai'));
                             },
-                            icon: Image.network('https://raw.githubusercontent.com/futa-ai/rainbow-button/develop/flutter_project/src/social-icon/twitter.png?token=GHSAT0AAAAAABZL2OOMOGHJLCVVO2HFQLBSY4VHQLQ')
+                            icon: Image.network('https://cdn.discordapp.com/attachments/1037739356414287956/1051260264516943943/twitter.png')
                         ),
                       ],
                     )

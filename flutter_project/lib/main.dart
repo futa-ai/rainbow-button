@@ -383,7 +383,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     IconButton(onPressed: (){
-                      // TODO: Notionページに飛ばす
+                      launchUrl(Uri.parse('https://futa-ai.notion.site/rainbow-button-f658580513c442da90433a8633b27115'));
                     },
                     icon: const Icon(Icons.help_outline)),
                     Row(
@@ -392,13 +392,13 @@ class _MyHomePageState extends State<MyHomePage> {
                             onPressed: (){
                               launchUrl(Uri.parse('https://github.com/futa-ai/rainbow-button'));
                             },
-                            icon: Image.network('https://raw.githubusercontent.com/futa-ai/rainbow-button/feature/footer/flutter_project/src/social-icon/github-mark.png?token=GHSAT0AAAAAABZL2OOMYFS5PCGEJL2SCIZQY4VAVTQ')
+                            icon: Image.network('https://raw.githubusercontent.com/futa-ai/rainbow-button/develop/flutter_project/src/social-icon/github-mark.png?token=GHSAT0AAAAAABZL2OOMCRZRL5D7FIJMIVKEY4VHQIA')
                         ),
                         IconButton(
                             onPressed: (){
                               launchUrl(Uri.parse('https://twitter.com/_futa_ai'));
                             },
-                            icon: Image.network('https://raw.githubusercontent.com/futa-ai/rainbow-button/feature/footer/flutter_project/src/social-icon/twitter.png?token=GHSAT0AAAAAABZL2OOMPJ4A6JBMW2YKMS6CY4VAVXA')
+                            icon: Image.network('https://raw.githubusercontent.com/futa-ai/rainbow-button/develop/flutter_project/src/social-icon/twitter.png?token=GHSAT0AAAAAABZL2OOMOGHJLCVVO2HFQLBSY4VHQLQ')
                         ),
                       ],
                     )

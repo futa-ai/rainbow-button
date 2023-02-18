@@ -1,6 +1,6 @@
 {
     "name": "rainbow-button",
-    "version": "0.1.0",
+    "version": "1.0.0",
     "manifest_version": 3,
     "description": "ブラウザ上のボタンが虹色に光ります",
     "icons": {

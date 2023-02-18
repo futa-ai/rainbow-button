@@ -146,7 +146,7 @@ class _MyHomePageState extends State<MyHomePage> {
     return Scaffold(
       appBar: null,
       body: Container(
-        width: 350,
+        width: 400,
         child: SingleChildScrollView(
           child: Column(
             children: [
@@ -450,7 +450,7 @@ class _MyHomePageState extends State<MyHomePage> {
                         colorName = "red";
                         break;
                       case RadioValue.USER:
-                        colorName = "blue";
+                        colorName = convertColor(selectedColor);
                         break;
                       default:
                         debugPrint('【異常】： switch文の引数になりえないデータです。');
@@ -731,6 +731,7 @@ class _MyHomePageState extends State<MyHomePage> {
     pickerColor = color;
   }
 
+  /// ユーザ色の設定ダイアログビュー
   void _showPicker(BuildContext context) {
     var _colorNameController = TextEditingController();
     List<Widget> colors = [];
@@ -742,50 +743,66 @@ class _MyHomePageState extends State<MyHomePage> {
         return StatefulBuilder(
           builder: (BuildContext context, StateSetter setState) {
             return AlertDialog(
+              insetPadding: EdgeInsets.all(0),
               title: const Text('カスタム色の作成'),
               content: SingleChildScrollView(
                 child: Column(
                   children: [
+                    /// 色の吹き出しアイコン
                     Container(
                       width: 300,
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
-                        children: (){
-                          _previewColors.forEach((_color) {
-                            colors.add(
-                              InkWell(
-                                onTap: () {
-                                  /// TODO: 好きな場所の色を変更できるようにする(出来れば)
-                                },
-                                child: Stack(
-                                  alignment: AlignmentDirectional.center,
-                                  children: [
-                                    Container(
+                      height: 50,
+                      child: Center(
+                        child: ListView.separated(
+                          shrinkWrap: true,
+                          scrollDirection: Axis.horizontal,
+                          itemCount: _previewColors.length,
+                          itemBuilder: (BuildContext context, int index){
+                            return InkWell(
+                              onTap: () {
+                                setState((){
+                                  if(_previewColors.length > 1) _previewColors.removeAt(index);
+                                });
+                              },
+                              child: Stack(
+                                alignment: Alignment.topRight,
+                                children: [
+                                  Padding(
+                                    padding: const EdgeInsets.only(left: 10, right: 10, top:10),
+                                    child: Container(
                                       width: 30,
                                       height: 40,
                                       decoration: ShapeDecoration(
-                                        color: _color,
-                                        shape: const BubbleBorder(usePadding: false),
-                                        shadows: const [
-                                          BoxShadow(
-                                            color: Colors.grey, //色
-                                            spreadRadius: 1,
-                                            blurRadius: 1,
-                                            offset: Offset(1, 1),
-                                          ),
-                                        ]
+                                          color: _previewColors[index],
+                                          shape: const BubbleBorder(usePadding: false),
+                                          shadows: const [
+                                            BoxShadow(
+                                              color: Colors.grey, //色
+                                              spreadRadius: 1,
+                                              blurRadius: 1,
+                                              offset: Offset(1, 1),
+                                            ),
+                                          ]
                                       ),
                                     ),
-                                  ],
-                                ),
-                              )
+                                  ),
+                                  const Icon(
+                                    Icons.delete_forever,
+                                    size: 20,
+                                    color: Colors.black,
+                                  ),
+                                ],
+                              ),
                             );
-                          });
-                          return colors;
-                        }(),
-
+                          },
+                          separatorBuilder: (BuildContext context, int index){
+                            return SizedBox(width: (300 - 50*_previewColors.length)/(_previewColors.length-1),);
+                          },
+                        ),
                       ),
                     ),
+
+                    /// グラデーションプレビューのバー
                     Container(
                       width: 300,
                       height: 25,
@@ -807,7 +824,10 @@ class _MyHomePageState extends State<MyHomePage> {
                           ),
                       ),
                     ),
+
                     const SizedBox(height: 20),
+
+                    /// カラーピッカー
                     ColorPicker(
                       pickerColor: pickerColor,
                       onColorChanged: _changeColor,
@@ -825,7 +845,8 @@ class _MyHomePageState extends State<MyHomePage> {
                       portraitOnly: true,
                     ),
                     Padding(
-                      padding: const EdgeInsets.fromLTRB(16, 0, 16, 16),
+                      padding: const EdgeInsets.fromLTRB(16, 0, 16, 1),
+                      /// カラーコード部分
                       child: CupertinoTextField(
                         controller: _colorNameController,
                         prefix: const Padding(
@@ -836,7 +857,7 @@ class _MyHomePageState extends State<MyHomePage> {
                           icon: const Icon(Icons.content_paste_rounded),
                           onPressed: () => Clipboard.setData(ClipboardData(text: _colorNameController.text)),
                         ),
-                        autofocus: true,
+                        autofocus: false,
                         maxLength: 9,
                         inputFormatters: [
                           UpperCaseTextFormatter(),
@@ -849,34 +870,7 @@ class _MyHomePageState extends State<MyHomePage> {
               ),
               actions: <Widget>[
                 Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      children: [
-                        ElevatedButton(
-                          child: const Text('左の色を削除'),
-                          onPressed: () {
-                            setState((){
-                              colors = [];
-                              if(_previewColors.length > 1) _previewColors.removeAt(0);
-                            });
-                          },
-                        ),
-                        const SizedBox(width: 10),
-                        ElevatedButton(
-                          child: const Text('右の色を削除'),
-                          onPressed: () {
-                            setState((){
-                              colors = [];
-                              if(_previewColors.length > 1) _previewColors.removeLast();
-                            });
-                          },
-                        ),
-                        const SizedBox(width: 15),
-                      ],
-                    ),
-                    const SizedBox(height: 10),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: [
@@ -889,7 +883,13 @@ class _MyHomePageState extends State<MyHomePage> {
                             });
                           },
                         ),
-                        const SizedBox(width: 10),
+                        const SizedBox(width: 15),
+                      ],
+                    ),
+                    const SizedBox(height: 10),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
                         ElevatedButton(
                           style: ElevatedButton.styleFrom(
                             backgroundColor: Colors.redAccent,
@@ -913,5 +913,15 @@ class _MyHomePageState extends State<MyHomePage> {
         );
       }
     ).then((_) => setState((){}) );
+  }
+
+  /// Color型をString型のカラーコードに変換する
+  String convertColor(List<Color> colors){
+    String colorCode = "";
+    colors.forEach((color) {
+      colorCode += "#${color.value.toRadixString(16)}, ";
+    });
+    colorCode = colorCode.substring(0, colorCode.length - 2);
+    return colorCode;
   }
 }

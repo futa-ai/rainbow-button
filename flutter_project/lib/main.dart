@@ -19,6 +19,8 @@ class MyApp extends StatelessWidget {
       title: 'rainbow button',
       theme: ThemeData(
         primarySwatch: Colors.blue,
+        backgroundColor: const Color.fromRGBO(222, 247, 255, 1),
+        scaffoldBackgroundColor: const Color.fromRGBO(222, 247, 255, 1),
       ),
       home: const MyHomePage(),
     );
@@ -151,12 +153,12 @@ class _MyHomePageState extends State<MyHomePage> {
           child: Column(
             children: [
               SizedBox(
-                width: 330,
+                width: 380,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.end,
                   children: [
                     SizedBox(
-                      width: 165,
+                      width: 190,
                       child: SwitchListTile(
                         value: !_activeAll,
                         activeColor: Colors.lightBlueAccent,
@@ -172,7 +174,7 @@ class _MyHomePageState extends State<MyHomePage> {
               ),
               const SizedBox(height: 10),
               Container(
-                width: 330,
+                width: 380,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(10),
                   color:
@@ -258,7 +260,7 @@ class _MyHomePageState extends State<MyHomePage> {
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
                           SizedBox(
-                            width: 330,
+                            width: 380,
                             child: Icon(
                               (_isOpened[0])
                                   ? Icons.expand_less
@@ -273,7 +275,7 @@ class _MyHomePageState extends State<MyHomePage> {
               ),
               const SizedBox(height: 10),
               Container(
-                width: 330,
+                width: 380,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(10),
                   color:
@@ -325,7 +327,7 @@ class _MyHomePageState extends State<MyHomePage> {
                             Column(
                               children: [
                                 SizedBox(
-                                  width: 295,
+                                  width: 345,
                                   height: 40,
                                   child: Column(
                                     crossAxisAlignment:
@@ -342,7 +344,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                   ),
                                 ),
                                 Container(
-                                  width: 290,
+                                  width: 340,
                                   child: Column(
                                     children: [
                                       for (var i = 0;
@@ -401,7 +403,7 @@ class _MyHomePageState extends State<MyHomePage> {
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
                           SizedBox(
-                            width: 330,
+                            width: 380,
                             child: Icon(
                               (_isOpened[1])
                                   ? Icons.expand_less
@@ -536,7 +538,7 @@ class _MyHomePageState extends State<MyHomePage> {
               ),
               const SizedBox(height: 10),
               Container(
-                  width: 350,
+                  width: 400,
                   color: const Color(0xffFFF5DB),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -584,7 +586,7 @@ class _MyHomePageState extends State<MyHomePage> {
     return Column(
       children: [
         SizedBox(
-          width: 295,
+          width: 345,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: const [
@@ -599,7 +601,7 @@ class _MyHomePageState extends State<MyHomePage> {
         ),
         const SizedBox(height: 10),
         SizedBox(
-          width: 290,
+          width: 340,
           child: Column(
             children: [
               Row(
@@ -671,7 +673,7 @@ class _MyHomePageState extends State<MyHomePage> {
         children: [
           Container(
             height: 40,
-            width: 140,
+            width: 165,
             decoration: BoxDecoration(
               border: Border.all(color: Colors.grey),
               borderRadius: BorderRadius.circular(10),

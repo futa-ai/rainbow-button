@@ -65,8 +65,12 @@ function changeColor() {
             // CSS色付け
             var elements = document.getElementsByTagName(tag);
             for (var element of elements) {
-                element.style.background = "linear-gradient(to right," + color + ") 0 / 200%";
-                element.style.animation = "5s rainbowAnimation linear infinite";
+                if (color.length == 9) {
+                    element.style.background = color;
+                } else {
+                    element.style.background = "linear-gradient(to right," + color + ") 0 / 200%";
+                    element.style.animation = "5s rainbowAnimation linear infinite";
+                }
             }
         }
     });

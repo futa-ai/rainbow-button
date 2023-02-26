@@ -66,7 +66,8 @@ function changeColor() {
             var elements = document.getElementsByTagName(tag);
             for (var element of elements) {
                 if (color.length == 9) {
-                    element.style.background = color;
+                    element.style.background = "linear-gradient(to right," + color + ", " + color + ") 0 / 200%";
+                    element.style.animation = "5s rainbowAnimation linear infinite";
                 } else {
                     element.style.background = "linear-gradient(to right," + color + ") 0 / 200%";
                     element.style.animation = "5s rainbowAnimation linear infinite";

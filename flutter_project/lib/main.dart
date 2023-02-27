@@ -929,6 +929,12 @@ class _MyHomePageState extends State<MyHomePage> {
       color_6 = color_hex.substring(2, 8);
       colorCode += "#$color_6""$color_2, ";
     });
+    for(int i = colors.length - 2; i >= 0; i--){
+      color_hex = colors[i].value.toRadixString(16);
+      color_2 = color_hex.substring(0, 2);
+      color_6 = color_hex.substring(2, 8);
+      colorCode += "#$color_6""$color_2, ";
+    }
     colorCode = colorCode.substring(0, colorCode.length - 2);
     return colorCode;
   }

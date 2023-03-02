@@ -1,5 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_colorpicker/flutter_colorpicker.dart';
+import 'package:flutter_project/bubble_border.dart';
 import 'package:flutter_project/javascript.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -16,6 +19,8 @@ class MyApp extends StatelessWidget {
       title: 'rainbow button',
       theme: ThemeData(
         primarySwatch: Colors.blue,
+        backgroundColor: const Color.fromRGBO(222, 247, 255, 1),
+        scaffoldBackgroundColor: const Color.fromRGBO(222, 247, 255, 1),
       ),
       home: const MyHomePage(),
     );
@@ -37,7 +42,7 @@ const Map<String, List<Color>> _buttonColor = {
   "blue": [Color(0xff0000FF), Color(0xff4169E1), Color(0xff87CEFA)],
   "purple": [Color(0xff9400D3), Color(0xff6A5ACD), Color(0xffE6E6FA)],
   "pink": [Color(0xffFF1493), Color(0xffFF69B4), Color(0xffFFC0CB)],
-  "red": [Color(0xffFF0000), Color(0xffF08080), Color(0xffFFE4E1)]
+  "red": [Color(0xffFF0000), Color(0xffF08080), Color(0xffFFE4E1)],
 };
 
 enum RadioValue {
@@ -50,7 +55,8 @@ enum RadioValue {
   BLUE,
   PURPLE,
   PINK,
-  RED
+  RED,
+  USER
 }
 var _isChecked = [
   false,
@@ -101,6 +107,8 @@ var _canTap = true;
 List<String> tagName = [];
 String colorName = "";
 Color _notSelectedColor = const Color(0xffE5E5E5);
+List<Color> selectedColor = [Colors.blue];
+Color pickerColor = Colors.blue;
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({Key? key}) : super(key: key);
@@ -140,17 +148,17 @@ class _MyHomePageState extends State<MyHomePage> {
     return Scaffold(
       appBar: null,
       body: Container(
-        width: 350,
+        width: 400,
         child: SingleChildScrollView(
           child: Column(
             children: [
               SizedBox(
-                width: 330,
+                width: 380,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.end,
                   children: [
                     SizedBox(
-                      width: 165,
+                      width: 190,
                       child: SwitchListTile(
                         value: !_activeAll,
                         activeColor: Colors.lightBlueAccent,
@@ -166,7 +174,7 @@ class _MyHomePageState extends State<MyHomePage> {
               ),
               const SizedBox(height: 10),
               Container(
-                width: 330,
+                width: 380,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(10),
                   color:
@@ -252,7 +260,7 @@ class _MyHomePageState extends State<MyHomePage> {
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
                           SizedBox(
-                            width: 330,
+                            width: 380,
                             child: Icon(
                               (_isOpened[0])
                                   ? Icons.expand_less
@@ -267,7 +275,7 @@ class _MyHomePageState extends State<MyHomePage> {
               ),
               const SizedBox(height: 10),
               Container(
-                width: 330,
+                width: 380,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(10),
                   color:
@@ -319,7 +327,7 @@ class _MyHomePageState extends State<MyHomePage> {
                             Column(
                               children: [
                                 SizedBox(
-                                  width: 295,
+                                  width: 345,
                                   height: 40,
                                   child: Column(
                                     crossAxisAlignment:
@@ -336,7 +344,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                   ),
                                 ),
                                 Container(
-                                  width: 290,
+                                  width: 340,
                                   child: Column(
                                     children: [
                                       for (var i = 0;
@@ -395,7 +403,7 @@ class _MyHomePageState extends State<MyHomePage> {
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
                           SizedBox(
-                            width: 330,
+                            width: 380,
                             child: Icon(
                               (_isOpened[1])
                                   ? Icons.expand_less
@@ -411,49 +419,54 @@ class _MyHomePageState extends State<MyHomePage> {
               const SizedBox(height: 10),
               InkWell(
                 onTap: () {
-                  switch (_gValue) {
-                    case RadioValue.RAINBOW:
-                      colorName = "rainbow";
-                      break;
-                    case RadioValue.BLACK:
-                      colorName = "black";
-                      break;
-                    case RadioValue.BROWN:
-                      colorName = "brown";
-                      break;
-                    case RadioValue.ORANGE:
-                      colorName = "orange";
-                      break;
-                    case RadioValue.YELLOW:
-                      colorName = "yellow";
-                      break;
-                    case RadioValue.GREEN:
-                      colorName = "green";
-                      break;
-                    case RadioValue.BLUE:
-                      colorName = "blue";
-                      break;
-                    case RadioValue.PURPLE:
-                      colorName = "purple";
-                      break;
-                    case RadioValue.PINK:
-                      colorName = "pink";
-                      break;
-                    case RadioValue.RED:
-                      colorName = "red";
-                      break;
-                    default:
-                      debugPrint('【異常】： switch文の引数になりえないデータです。');
-                      break;
+                  if(_canTap){
+                    switch (_gValue) {
+                      case RadioValue.RAINBOW:
+                        colorName = "rainbow";
+                        break;
+                      case RadioValue.BLACK:
+                        colorName = "black";
+                        break;
+                      case RadioValue.BROWN:
+                        colorName = "brown";
+                        break;
+                      case RadioValue.ORANGE:
+                        colorName = "orange";
+                        break;
+                      case RadioValue.YELLOW:
+                        colorName = "yellow";
+                        break;
+                      case RadioValue.GREEN:
+                        colorName = "green";
+                        break;
+                      case RadioValue.BLUE:
+                        colorName = "blue";
+                        break;
+                      case RadioValue.PURPLE:
+                        colorName = "purple";
+                        break;
+                      case RadioValue.PINK:
+                        colorName = "pink";
+                        break;
+                      case RadioValue.RED:
+                        colorName = "red";
+                        break;
+                      case RadioValue.USER:
+                        colorName = convertColor(selectedColor);
+                        break;
+                      default:
+                        debugPrint('【異常】： switch文の引数になりえないデータです。');
+                        break;
+                    }
+                    debugPrint('色は$colorNameです');
+                    tagName = [];
+                    for (var i=0; i < _tagNames.length; i++) {
+                      if (_isChecked[i]) tagName.add(_tagNames[i]);
+                    }
+                    debugPrint('タグは$tagNameです');
+                    setData(tagName, colorName);
+                    reloadPage();
                   }
-                  debugPrint('色は$colorNameです');
-                  tagName = [];
-                  if (_isChecked[0]) tagName.add('a');
-                  if (_isChecked[1]) tagName.add('p');
-                  if (_isChecked[2]) tagName.add('button');
-                  debugPrint('タグは$tagNameです');
-                  setData(tagName, colorName);
-                  reloadPage();
                 },
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
@@ -489,6 +502,12 @@ class _MyHomePageState extends State<MyHomePage> {
                                       return _buttonColor['pink']!;
                                     case RadioValue.RED:
                                       return _buttonColor['red']!;
+                                    case RadioValue.USER:
+                                      if(selectedColor.length == 1){
+                                        return [selectedColor[0], selectedColor[0]];
+                                      }else{
+                                        return selectedColor;
+                                      }
                                     default:
                                       return [Colors.deepPurple.shade200];
                                   }
@@ -519,7 +538,7 @@ class _MyHomePageState extends State<MyHomePage> {
               ),
               const SizedBox(height: 10),
               Container(
-                  width: 350,
+                  width: 400,
                   color: const Color(0xffFFF5DB),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -567,7 +586,7 @@ class _MyHomePageState extends State<MyHomePage> {
     return Column(
       children: [
         SizedBox(
-          width: 295,
+          width: 345,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: const [
@@ -582,7 +601,7 @@ class _MyHomePageState extends State<MyHomePage> {
         ),
         const SizedBox(height: 10),
         SizedBox(
-          width: 290,
+          width: 340,
           child: Column(
             children: [
               Row(
@@ -625,6 +644,13 @@ class _MyHomePageState extends State<MyHomePage> {
                 ],
               ),
               const SizedBox(height: 10),
+              Row(
+                children: [
+                  _colorButton('ユーザ', RadioValue.USER),
+                  const SizedBox(width: 10),
+                ],
+              ),
+              const SizedBox(height: 10),
             ],
           ),
         ),
@@ -638,13 +664,16 @@ class _MyHomePageState extends State<MyHomePage> {
         setState(() {
           _gValue = rainbowValue;
         });
+        if(rainbowValue == RadioValue.USER) {
+          _showPicker(context);
+        }
       },
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Container(
             height: 40,
-            width: 140,
+            width: 165,
             decoration: BoxDecoration(
               border: Border.all(color: Colors.grey),
               borderRadius: BorderRadius.circular(10),
@@ -673,6 +702,12 @@ class _MyHomePageState extends State<MyHomePage> {
                             return _buttonColor['pink']!;
                           case RadioValue.RED:
                             return _buttonColor['red']!;
+                          case RadioValue.USER:
+                            if(selectedColor.length == 1){
+                              return [selectedColor[0], selectedColor[0]];
+                            }else{
+                              return selectedColor;
+                            }
                           default:
                             return [Colors.deepPurple.shade200];
                         }
@@ -692,5 +727,215 @@ class _MyHomePageState extends State<MyHomePage> {
         ],
       ),
     );
+  }
+
+  void _changeColor(Color color) {
+    pickerColor = color;
+  }
+
+  /// ユーザ色の設定ダイアログビュー
+  void _showPicker(BuildContext context) {
+    var _colorNameController = TextEditingController();
+    List<Widget> colors = [];
+    List<Color> _previewColors = [...selectedColor];
+
+    showDialog(
+      context: context,
+      builder:(_) {
+        return StatefulBuilder(
+          builder: (BuildContext context, StateSetter setState) {
+            return AlertDialog(
+              insetPadding: EdgeInsets.all(0),
+              title: const Text('カスタム色の作成'),
+              content: SingleChildScrollView(
+                child: Column(
+                  children: [
+                    /// 色の吹き出しアイコン
+                    Container(
+                      width: 300,
+                      height: 50,
+                      child: Center(
+                        child: ListView.separated(
+                          shrinkWrap: true,
+                          scrollDirection: Axis.horizontal,
+                          itemCount: _previewColors.length,
+                          itemBuilder: (BuildContext context, int index){
+                            return InkWell(
+                              onTap: () {
+                                setState((){
+                                  if(_previewColors.length > 1) _previewColors.removeAt(index);
+                                });
+                              },
+                              child: Stack(
+                                alignment: Alignment.topRight,
+                                children: [
+                                  Padding(
+                                    padding: const EdgeInsets.only(left: 10, right: 10, top:10),
+                                    child: Container(
+                                      width: 30,
+                                      height: 40,
+                                      decoration: ShapeDecoration(
+                                          color: _previewColors[index],
+                                          shape: const BubbleBorder(usePadding: false),
+                                          shadows: const [
+                                            BoxShadow(
+                                              color: Colors.grey, //色
+                                              spreadRadius: 1,
+                                              blurRadius: 1,
+                                              offset: Offset(1, 1),
+                                            ),
+                                          ]
+                                      ),
+                                    ),
+                                  ),
+                                  const Icon(
+                                    Icons.delete_forever,
+                                    size: 20,
+                                    color: Colors.black,
+                                  ),
+                                ],
+                              ),
+                            );
+                          },
+                          separatorBuilder: (BuildContext context, int index){
+                            return SizedBox(width: (300 - 50*_previewColors.length)/(_previewColors.length-1),);
+                          },
+                        ),
+                      ),
+                    ),
+
+                    /// グラデーションプレビューのバー
+                    Container(
+                      width: 300,
+                      height: 25,
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(10),
+                          gradient: LinearGradient(
+                            colors: (){
+                              if(_previewColors.length > 1) {
+                                List<Color> _returnColor = [];
+                                _previewColors.forEach((color) {
+                                  _returnColor.add(color);
+                                });
+                                return _returnColor;
+                              }else{
+                                return [_previewColors[0], _previewColors[0]];
+                              }
+                            }(),
+
+                          ),
+                      ),
+                    ),
+
+                    const SizedBox(height: 20),
+
+                    /// カラーピッカー
+                    ColorPicker(
+                      pickerColor: pickerColor,
+                      onColorChanged: _changeColor,
+                      colorPickerWidth: 300,
+                      pickerAreaHeightPercent: 0.7,
+                      enableAlpha: true,
+                      displayThumbColor: true,
+                      paletteType: PaletteType.hsvWithHue,
+                      labelTypes: const [ColorLabelType.rgb, ColorLabelType.hex, ColorLabelType.hsl, ColorLabelType.hsv],
+                      pickerAreaBorderRadius: const BorderRadius.only(
+                        topLeft: Radius.circular(2),
+                        topRight: Radius.circular(2),
+                      ),
+                      hexInputController: _colorNameController,
+                      portraitOnly: true,
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.fromLTRB(16, 0, 16, 1),
+                      /// カラーコード部分
+                      child: CupertinoTextField(
+                        controller: _colorNameController,
+                        prefix: const Padding(
+                          padding: EdgeInsets.only(left:8),
+                          child: Icon(Icons.tag),
+                        ),
+                        suffix: IconButton(
+                          icon: const Icon(Icons.content_paste_rounded),
+                          onPressed: () => Clipboard.setData(ClipboardData(text: _colorNameController.text)),
+                        ),
+                        autofocus: false,
+                        maxLength: 9,
+                        inputFormatters: [
+                          UpperCaseTextFormatter(),
+                          FilteringTextInputFormatter.allow(RegExp(kValidHexPattern)),
+                        ],
+                      ),
+                    )
+                  ],
+                ),
+              ),
+              actions: <Widget>[
+                Column(
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                        ElevatedButton(
+                          child: const Text('カスタム色に追加'),
+                          onPressed: () {
+                            setState((){
+                              colors = [];
+                              _previewColors.add(pickerColor);
+                            });
+                          },
+                        ),
+                        const SizedBox(width: 15),
+                      ],
+                    ),
+                    const SizedBox(height: 10),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                        ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: Colors.redAccent,
+                            // foregroundColor: Colors.blue,
+                          ),
+                          child: const Text('決定'),
+                          onPressed: () {
+                            _gValue = RadioValue.USER;
+                            selectedColor = _previewColors;
+                            Navigator.of(context).pop();
+                          },
+                        ),
+                        const SizedBox(width: 15),
+                      ],
+                    ),
+                  ],
+                ),
+              ],
+            );
+          }
+        );
+      }
+    ).then((_) => setState((){}) );
+  }
+
+  /// Color型をString型のカラーコードに変換する
+  String convertColor(List<Color> colors){
+    String colorCode = "";
+    String color_hex = "";
+    String color_2 = "";
+    String color_6 = "";
+    colors.forEach((color) {
+      color_hex = color.value.toRadixString(16);
+      color_2 = color_hex.substring(0, 2);
+      color_6 = color_hex.substring(2, 8);
+      colorCode += "#$color_6""$color_2, ";
+    });
+    for(int i = colors.length - 2; i >= 0; i--){
+      color_hex = colors[i].value.toRadixString(16);
+      color_2 = color_hex.substring(0, 2);
+      color_6 = color_hex.substring(2, 8);
+      colorCode += "#$color_6""$color_2, ";
+    }
+    colorCode = colorCode.substring(0, colorCode.length - 2);
+    return colorCode;
   }
 }

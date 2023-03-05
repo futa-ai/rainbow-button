@@ -27,7 +27,7 @@ function reloadPage() {
             // CSS色付け
             var elements = document.getElementsByTagName(tag);
             for (var element of elements) {
-                element.style.background = "initial";
+                element.style.background = null;
             }
         }
     });

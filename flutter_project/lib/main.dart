@@ -920,9 +920,21 @@ class _MyHomePageState extends State<MyHomePage> {
   /// Color型をString型のカラーコードに変換する
   String convertColor(List<Color> colors){
     String colorCode = "";
+    String color_hex = "";
+    String color_2 = "";
+    String color_6 = "";
     colors.forEach((color) {
-      colorCode += "#${color.value.toRadixString(16)}, ";
+      color_hex = color.value.toRadixString(16);
+      color_2 = color_hex.substring(0, 2);
+      color_6 = color_hex.substring(2, 8);
+      colorCode += "#$color_6""$color_2, ";
     });
+    for(int i = colors.length - 2; i >= 0; i--){
+      color_hex = colors[i].value.toRadixString(16);
+      color_2 = color_hex.substring(0, 2);
+      color_6 = color_hex.substring(2, 8);
+      colorCode += "#$color_6""$color_2, ";
+    }
     colorCode = colorCode.substring(0, colorCode.length - 2);
     return colorCode;
   }
